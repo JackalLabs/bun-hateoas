@@ -254,3 +254,7 @@ $RECYCLE.BIN/
 /.env
 
 build
+/.idea/.gitignore
+/.idea/hateoas.iml
+/.idea/modules.xml
+/.idea/vcs.xml
