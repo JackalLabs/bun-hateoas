@@ -24,6 +24,10 @@ type HATEOAS struct {
 	Groups []*Group
 }
 
+type GroupType interface {
+	WithGroup(path string, fn func(group *bunrouter.Group))
+}
+
 // PathSet is a set of routes where no routes can be duplicated
 type PathSet map[Route]bool
 
@@ -72,7 +76,7 @@ func (g *Group) DELETE(path string, handlerFunction bunrouter.HandlerFunc) {
 
 type BunGroupFunc func(group *Group)
 
-func (h *HATEOAS) WithGroup(g *bunrouter.Group, path string, groupFunc BunGroupFunc) {
+func (h *HATEOAS) WithGroup(g GroupType, path string, groupFunc BunGroupFunc) {
 	g.WithGroup(path, func(group *bunrouter.Group) {
 		newGroup := &Group{
 			Name:     path,
